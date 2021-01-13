@@ -99,6 +99,19 @@ app.post('/api/persons', (request, response) => {
   }
 })
 
+app.put('/api/persons/:id', (request, response) => {
+  const id = Number(request.params.id)
+  const person = persons.find(person => person.id === id)
+  console.log(person)
+  if (person) {
+    person.number = request.body.number
+    console.log('putteri', person)
+    response.status(200).json(person)
+  } else {
+    response.status(400).end()
+  }
+})
+
 app.get('/info', (request, response) => {
   response.send(`<p>Phonebook has info for ${persons.length} people<br /><br />${Date()}</p>`)
 })
